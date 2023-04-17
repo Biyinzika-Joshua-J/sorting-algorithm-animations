@@ -6,6 +6,7 @@ import { Navbar, Footer, ToggleColorButton } from "./components";
 import { ThemeProvider, createTheme } from "@mui/material";
 import { useSelector } from "react-redux";
 
+
 function App() {
   const theme = createTheme({
     palette: {
@@ -20,6 +21,11 @@ function App() {
       },
       info: {
         main: "#A5D7E8",
+      },
+      action: {
+        disabledBackground: '#F0F0F0',
+        disabled: '#000',
+        disabledOpacity:'1'
       },
     },
   });

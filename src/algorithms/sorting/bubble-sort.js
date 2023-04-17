@@ -12,7 +12,7 @@ export function bubbleSort(list, animations) {
         animations.push(animation);
       }
     }
-    return [list, animations];
+    return animations;
   }
   
 
@@ -47,8 +47,7 @@ export async function bubbleSortAnimator(animations, bars) {
   }
   
    function bubbleSortHelper(list, bars){
-    let animations = [];
-    let [sorted, sortingAnimations] = bubbleSort(list, animations);
+    let sortingAnimations = bubbleSort(list, []);
     bubbleSortAnimator(sortingAnimations, bars);
 
   }

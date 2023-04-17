@@ -2,8 +2,8 @@ import { width } from "@mui/system";
 import React, { useRef, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { SortingApi } from "../../algorithms";
-import { updateBarsToSortedOrder } from "../../features/barsSlice";
-import { updateSortBtnPressed } from "../../features/sortingSlice";
+import { updateBarsToSortedOrder, updateBarsAreSorted } from "../../features/barsSlice";
+import { updateSortBtnPressed, updateIsSorting } from "../../features/sortingSlice";
 
 
 const Bars = () => {
@@ -15,7 +15,6 @@ const Bars = () => {
 
   const dispatch = useDispatch();
 
-  
 
  useEffect( ()=>{
      if (sortBtnPressed){
@@ -23,9 +22,27 @@ const Bars = () => {
          dispatch(updateSortBtnPressed({type:'sort-btn-pressed', pressed:false}))
 
         }
-      
-    
   }, [sortBtnPressed])
+
+  useEffect(() => {
+    const interval = setInterval(()=>{
+      let array =[];
+      for (let i=0; i<barColumns.current.children.length; i++){
+        array[i] = barColumns.current.children[i].style.height;
+      }
+      array = array.map((height)=>{
+          return parseInt(height.substr(0, height.length-2))
+      })
+      let compareArray = [...array]
+      array = array.sort((a,b) => a-b);
+      if (compareArray.toString() === array.toString()){
+        dispatch(updateIsSorting({type:'isSorting', isSorting:false}))
+        dispatch(updateBarsAreSorted({type:'barsAreSorted', barsAreSorted:true}))
+        clearInterval(interval)
+      }
+    }, 1000)
+  }, [sortBtnPressed])
+  
  
   return (
     <>

@@ -9,15 +9,18 @@ import {
 } from "@mui/material";
 import "./NavbarInput.css";
 import { useDispatch, useSelector } from "react-redux";
-import { generateNewArray } from "../../features/barsSlice";
+import { generateNewArray, updateBarsAreSorted } from "../../features/barsSlice";
 import { updateSortingFuction } from "../../features/sortingSlice";
-import { updateSortBtnPressed } from "../../features/sortingSlice";
+import { updateSortBtnPressed, updateIsSorting } from "../../features/sortingSlice";
 import { bubbleSort } from "../../algorithms";
 
 const NavbarInput = () => {
   const [sortingAlgorithm, setAortingAlgorithm] = useState("Select algorithm");
   const bars = useSelector((state) => state.bars.bars);
+  const isDisabledButton = useSelector(state => state.sorter.isSorting);
+  const barsAreAlreadySorted = useSelector(state => state.bars.barsAreSorted);
   const dispatch = useDispatch();
+
 
   const hanldeChangeOfSortingAlgorithm = (e) => {
     const sortingFunction = e.target.value;
@@ -31,10 +34,15 @@ const NavbarInput = () => {
   };
 
   function sort() {
+    if (barsAreAlreadySorted){
+      alert('The array is already sorted, try generating a new one!');
+      return; 
+    }
     if (sortingAlgorithm != "Select algorithm"){
       dispatch(
         updateSortBtnPressed({ type: "sort-btn-pressed", pressed: true })
       );
+      dispatch(updateIsSorting({type:'isSorting', isSorting:true}))
     }else{
       console.log('please select a sorting algorithm to continue')
     }
@@ -70,18 +78,24 @@ const NavbarInput = () => {
       <Button
         onClick={() => {
           dispatch(generateNewArray(10, 300, bars));
+          dispatch(updateBarsAreSorted({type:'barsAreSorted', barsAreSorted:false}))
         }}
         variant="contained"
         color="info"
+        disabled={isDisabledButton}
       >
         Generate array
       </Button>
+
       <Button
         onClick={() => {
+        
           sort();
         }}
-        variant="outlined"
+        variant="contained"
+        disabled={isDisabledButton}
         color="info"
+        
        sx={{}}
       >
         Sort
