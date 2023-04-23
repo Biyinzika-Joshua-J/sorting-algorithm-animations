@@ -1,0 +1,58 @@
+.themeContainer{
+    height: 80vh;
+}
+
+.light{
+    transition:  all .9s;
+}
+
+.light .bar{
+    background-color: blue;
+}
+
+.dark{
+    background-color: #19376D;
+    transition: all .9s;
+}
+
+.dark .bar{
+    background-color: #A5D7E8;
+    transition: all .9s;
+}
+
+.light .bar{
+    transition: all .9s;
+}
+
+.dark .footer{
+    background-color: #576CBC;
+    color: #fff;
+}
+
+.chill {
+    background-color: #643A6B;
+    transition: all .9s;
+}
+
+.chill .bar{
+    background-color: #B0A4A4;
+    
+}
+
+.chill .footer{
+    background-color: #B0A4A4;
+    color: #000;
+}
+
+.breeze{
+    background-color: #917FB3;
+    transition: all .9s;
+}
+
+.breeze .bar{
+    background-color: #E5BEEC;
+}
+
+.breeze .footer{
+    background-color: #FDE2F3;
+}

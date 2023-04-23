@@ -9,9 +9,9 @@ import {
 import { Link } from "react-router-dom";
 import NavbarInput from "./NavbarInput";
 
-const Navbar = () => {
+const Navbar = ({color}) => {
   return (
-    <AppBar sx={{ backgroundColor: "#0B2447" }} position='static'>
+    <AppBar sx={{ backgroundColor: color }} position='static'>
       <Toolbar sx={{paddingTop:'.5rem'}}>
         <Box>
           <Link to={"/"} style={{ color: "white", textDecorationLine: "none" }}>

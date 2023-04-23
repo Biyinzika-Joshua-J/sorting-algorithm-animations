@@ -1,11 +1,10 @@
 import { bubbleSort } from ".";
 
 
- function SortingApi(sortingFunction, list, htmlCollectionBars){
-    
+ function SortingApi(sortingFunction, list, htmlCollectionBars, color){
     switch (sortingFunction) {
         case 'bubble-sort':
-            bubbleSort([...list], htmlCollectionBars);
+            bubbleSort([...list], htmlCollectionBars, color);
             break;
         default:
             console.log('other')

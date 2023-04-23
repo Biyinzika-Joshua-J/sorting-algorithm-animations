@@ -14,30 +14,3 @@
     margin: 0 auto;
 }
 
-.themeContainer{
-    height: 80vh;
-}
-
-.light{
-    transition:  all .9s;
-}
-
-.dark{
-    background-color: #19376D;
-    transition: all .9s;
-}
-
-.dark .bar{
-    background-color: #A5D7E8 !important;
-    transition: all .9s;
-}
-
-.light .bar{
-    transition: all .9s;
-}
-
-.dark .footer{
-    background-color: #576CBC !important;
-    color: #fff;
-}
-

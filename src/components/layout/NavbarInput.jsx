@@ -6,6 +6,7 @@ import {
   Select,
   MenuItem,
   Box,
+  IconButton,
 } from "@mui/material";
 import "./NavbarInput.css";
 import { useDispatch, useSelector } from "react-redux";
@@ -13,6 +14,10 @@ import { generateNewArray, updateBarsAreSorted } from "../../features/barsSlice"
 import { updateSortingFuction } from "../../features/sortingSlice";
 import { updateSortBtnPressed, updateIsSorting } from "../../features/sortingSlice";
 import { bubbleSort } from "../../algorithms";
+import ColorLensIcon from '@mui/icons-material/ColorLens';
+import SimpleDialog from "../dialog/Dialog";
+import Error from "../alerts/Error";
+import { generatingSortedArrayError, selectSortingAlgorithmError } from "../../features/errorSlice";
 
 const NavbarInput = () => {
   const [sortingAlgorithm, setAortingAlgorithm] = useState("Select algorithm");
@@ -20,7 +25,17 @@ const NavbarInput = () => {
   const isDisabledButton = useSelector(state => state.sorter.isSorting);
   const barsAreAlreadySorted = useSelector(state => state.bars.barsAreSorted);
   const dispatch = useDispatch();
+  const [open, setOpen] = useState(false);
+  const [selectedValue, setSelectedValue] = React.useState('light');
 
+  const handleClickOpenDialog = () => {
+    setOpen(true);
+  };
+
+  const handleCloseDialog = (value) => {
+    setOpen(false);
+    setSelectedValue(value);
+  };
 
   const hanldeChangeOfSortingAlgorithm = (e) => {
     const sortingFunction = e.target.value;
@@ -35,8 +50,8 @@ const NavbarInput = () => {
 
   function sort() {
     if (barsAreAlreadySorted){
-      alert('The array is already sorted, try generating a new one!');
-      return; 
+      dispatch(generatingSortedArrayError({type:'sorting-error', data:true}))
+      return ; 
     }
     if (sortingAlgorithm != "Select algorithm"){
       dispatch(
@@ -44,7 +59,7 @@ const NavbarInput = () => {
       );
       dispatch(updateIsSorting({type:'isSorting', isSorting:true}))
     }else{
-      console.log('please select a sorting algorithm to continue')
+      dispatch(selectSortingAlgorithmError({type:'sorting-error', data:true}))
     }
   }
 
@@ -100,6 +115,17 @@ const NavbarInput = () => {
       >
         Sort
       </Button>
+      
+      <IconButton sx={{backgroundColor:'#19376D'}} onClick={handleClickOpenDialog}>
+        <ColorLensIcon color="info"/>
+      </IconButton>
+
+      <SimpleDialog
+        //selectedValue={selectedValue}
+        open={open}
+        onClose={handleCloseDialog}
+        selectedValue={selectedValue}
+      />
     </>
   );
 };

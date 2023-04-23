@@ -6,7 +6,7 @@ import EmailIcon from "@mui/icons-material/Email";
 import { useSelector } from "react-redux";
 import { useSelect } from "@mui/base";
 
-const Footer = () => {
+const Footer = ({color}) => {
   const theme = useSelector(state => state.theme.mode);
   const darkModeStyles = {
     backgroundColor : '#576CBC ',
@@ -22,6 +22,7 @@ const Footer = () => {
         width: "100%",
         marginTop: "auto",
         ...(theme==='dark'?darkModeStyles:{ transition: 'all .2s'}),
+        //backgroundColor:color,
       }}
     >
       <Stack direction={"column"} spacing={1}>

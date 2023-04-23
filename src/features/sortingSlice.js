@@ -17,7 +17,6 @@ const sorting = createSlice({
             state.sort = payload.payload.pressed;
         },
         updateIsSorting: (state, payload) => {
-            console.log(payload)
             state.isSorting = payload.payload.isSorting;
         },
     }

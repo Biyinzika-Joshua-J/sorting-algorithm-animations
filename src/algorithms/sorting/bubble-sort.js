@@ -16,7 +16,7 @@ export function bubbleSort(list, animations) {
   }
   
 
-export async function bubbleSortAnimator(animations, bars) {
+export async function bubbleSortAnimator(animations, bars, color) {
 
     for (let i = 0; i < animations.length; i++) {
       let { comparison, swap } = animations[i];
@@ -24,15 +24,15 @@ export async function bubbleSortAnimator(animations, bars) {
         bars[comparison[0]].style.backgroundColor = "red";
         bars[comparison[1]].style.backgroundColor = "red";
         await timer(5)    
-        bars[comparison[0]].style.backgroundColor = "blue";
-        bars[comparison[1]].style.backgroundColor = "blue";
+        bars[comparison[0]].style.backgroundColor = color;
+        bars[comparison[1]].style.backgroundColor = color;
     
         await timer(0)
        
           if (swap) {
             
-            bars[comparison[0]].style.backgroundColor = "blue";
-            bars[comparison[1]].style.backgroundColor = "blue";
+            bars[comparison[0]].style.backgroundColor = color;
+            bars[comparison[1]].style.backgroundColor = color;
             // swap
             let temp = bars[comparison[0]].style.height;
             bars[comparison[0]].style.height =  `${bars[comparison[1]].style.height}`;
@@ -46,9 +46,9 @@ export async function bubbleSortAnimator(animations, bars) {
    
   }
   
-   function bubbleSortHelper(list, bars){
+   function bubbleSortHelper(list, bars, color){
     let sortingAnimations = bubbleSort(list, []);
-    bubbleSortAnimator(sortingAnimations, bars);
+    bubbleSortAnimator(sortingAnimations, bars, color);
 
   }
 

@@ -3,7 +3,7 @@ import IconButton from "@mui/material/IconButton";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
 import { useDispatch, useSelector } from "react-redux";
-import { changeTheme } from "../../features/themeSlice";
+import { toggleDarkLightTheme } from "../../features/themeSlice";
 
 
 function ToggleColorButton() {
@@ -11,9 +11,9 @@ function ToggleColorButton() {
     const dispatch = useDispatch();
     function toggleColorMode(){
       if (mode === 'dark'){
-        dispatch(changeTheme({type:'change-theme', data:'light'}));
+        dispatch(toggleDarkLightTheme({type:'change-theme', data:'light'}));
       }else{
-        dispatch(changeTheme({type:'change-theme', data:'dark'}));
+        dispatch(toggleDarkLightTheme({type:'change-theme', data:'dark'}));
       }
     }
 

@@ -12,13 +12,20 @@ const Bars = () => {
   const sortBtnPressed = useSelector(state => state.sorter.sort);
   const barColumns = useRef(null);
   const [sortedArray, setSortedArray] = useState([]);
+  const theme = useSelector(state => state.theme.mode)
 
   const dispatch = useDispatch();
 
+  const barColor = {
+    'chill':'#B0A4A4',
+    'breeze':'#E5BEEC',
+    'light':'blue',
+    'dark':'#A5D7E8',
+  }
 
  useEffect( ()=>{
      if (sortBtnPressed){
-         setSortedArray(SortingApi(sortingFunction, [...bars], barColumns.current.children));
+         setSortedArray(SortingApi(sortingFunction, [...bars], barColumns.current.children, barColor[theme]));
          dispatch(updateSortBtnPressed({type:'sort-btn-pressed', pressed:false}))
 
         }
@@ -57,7 +64,7 @@ const Bars = () => {
             style={{
               height: `${height}px`,
               width: "15px",
-              backgroundColor: "blue",
+              
               marginRight: "3px",
               transition:'all .0s' 
             }}

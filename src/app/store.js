@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import {barsReducer ,themeReducer, sorterReducer} from "../features/index";
+import {barsReducer ,themeReducer, sorterReducer, errorReducer} from "../features/index";
 
 
 export const store = configureStore({
@@ -7,5 +7,6 @@ export const store = configureStore({
         bars: barsReducer,
         theme:themeReducer,
         sorter:sorterReducer,
+        error:errorReducer,
     }
 })
